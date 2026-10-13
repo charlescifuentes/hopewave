@@ -11,19 +11,28 @@
  */
 @theme {
 	/**
-	 * These theme variables use CSS variables set by WordPress using values
-	 * from your `theme.json` file.
+	 * Colors are hardcoded (not `var(--wp--preset--…)`) because this site uses
+	 * the classic editor and WPBakery, where the theme.json CSS variables
+	 * aren't available. Keep these in sync with `theme/theme.json`.
 	 *
-	 * If you are using the classic editor, you should use hardcoded color
-	 * values instead of the `var()` functions below.
-     */
-	--color-background: var(--wp--preset--color--background);
-	--color-foreground: var(--wp--preset--color--foreground);
-	--color-primary: var(--wp--preset--color--primary);
-	--color-secondary: var(--wp--preset--color--secondary);
-	--color-tertiary: var(--wp--preset--color--tertiary);
-	--container-content: var(--wp--style--global--content-size);
-	--container-wide: var(--wp--style--global--wide-size);
+	 * Values taken from the production Elementor build of hopewavecf.org.
+	 */
+	--color-background: #ffffff;
+	--color-foreground: #333333;
+	--color-primary: #009bdd; /* Brand blue: Donate button, accents */
+	--color-secondary: #002244; /* Navy: Sign Up button, dot-grid icon */
+	--color-tertiary: #e1e7eb; /* Mist: Login button */
+	--color-slate: #324a6d;
+	--color-ink: #1c244b;
+	--color-light: #ececec; /* Home page background */
+	--color-border: #c2c2c2;
+
+	--container-content: 48rem;
+	--container-wide: 71.25rem; /* 1140px, Elementor's boxed width */
+
+	/* Soft glows used under the header buttons */
+	--shadow-glow-mist: 0 17px 35px -4px #c3ccd3;
+	--shadow-glow-sky: 0 17px 35px -4px #a7dcf3;
 
 	/**
 	 * These are the default `font-family` theme variables included with
@@ -37,7 +46,7 @@
 	 * https://tailwindcss.com/docs/theme#default-theme-variable-reference
 	 */
 	--font-sans:
-		ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Poppins", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
 		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 	--font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 	--font-mono:

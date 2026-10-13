@@ -11,29 +11,49 @@
 				},
 				{
 					"slug": "foreground",
-					"color": "#404040",
+					"color": "#333333",
 					"name": "Foreground"
 				},
 				{
 					"slug": "primary",
-					"color": "#b91c1c",
-					"name": "Primary"
+					"color": "#009bdd",
+					"name": "Primary (Brand Blue)"
 				},
 				{
 					"slug": "secondary",
-					"color": "#15803d",
-					"name": "Secondary"
+					"color": "#002244",
+					"name": "Secondary (Navy)"
 				},
 				{
 					"slug": "tertiary",
-					"color": "#0369a1",
-					"name": "Tertiary"
+					"color": "#e1e7eb",
+					"name": "Tertiary (Mist)"
+				},
+				{
+					"slug": "slate",
+					"color": "#324a6d",
+					"name": "Slate"
+				},
+				{
+					"slug": "ink",
+					"color": "#1c244b",
+					"name": "Ink"
+				},
+				{
+					"slug": "light",
+					"color": "#ececec",
+					"name": "Light Grey"
+				},
+				{
+					"slug": "border",
+					"color": "#c2c2c2",
+					"name": "Border Grey"
 				}
 			]
 		},
 		"layout": {
-			"contentSize": "40rem",
-			"wideSize": "60rem"
+			"contentSize": "48rem",
+			"wideSize": "71.25rem"
 		}
 	}
 }

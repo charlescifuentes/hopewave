@@ -1,0 +1,86 @@
+/**
+ * Site header: call to action buttons and the off-canvas menu drawer.
+ */
+
+/* Shared shape of the Donate / Sign Up / Login buttons */
+.btn-header {
+	@apply focus-visible:outline-primary inline-flex items-center gap-[15px] rounded-[5px] px-[15px] py-2.5 text-xs leading-none font-light whitespace-nowrap uppercase transition-[filter,translate] duration-200 hover:brightness-110 focus-visible:outline-2 focus-visible:outline-offset-2 md:px-[30px] md:py-3 lg:text-[15px];
+	@apply hover:-translate-y-px;
+}
+
+/* The logo image fills its sized wrapper */
+.site-branding .custom-logo-link,
+.site-branding .custom-logo {
+	@apply block h-auto w-full;
+}
+
+/*
+ * Drawer: a native <dialog> opened with showModal(), which gives us the focus
+ * trap, Escape-to-close and an inert page behind it for free.
+ */
+.site-drawer {
+	@apply text-secondary fixed inset-y-0 left-0 m-0 h-dvh max-h-none w-[min(20rem,85vw)] max-w-none bg-white p-0 shadow-2xl;
+	translate: -100% 0;
+	transition:
+		translate 0.3s ease,
+		overlay 0.3s allow-discrete,
+		display 0.3s allow-discrete;
+
+	&[open] {
+		translate: 0 0;
+
+		@starting-style {
+			translate: -100% 0;
+		}
+	}
+
+	&::backdrop {
+		background-color: rgb(0 34 68 / 0);
+		transition:
+			background-color 0.3s ease,
+			overlay 0.3s allow-discrete,
+			display 0.3s allow-discrete;
+	}
+
+	&[open]::backdrop {
+		background-color: rgb(0 34 68 / 0.5);
+
+		@starting-style {
+			background-color: rgb(0 34 68 / 0);
+		}
+	}
+}
+
+/* Matches the Home page nav bar: Poppins 700, 15px, uppercase */
+.drawer-menu {
+	@apply space-y-1;
+
+	a {
+		@apply hover:bg-tertiary hover:text-primary focus-visible:outline-primary block rounded-[5px] px-3 py-3 text-[15px] font-bold text-black uppercase transition-colors focus-visible:outline-2;
+	}
+
+	.current-menu-item > a,
+	.current_page_item > a {
+		@apply text-primary;
+	}
+
+	.sub-menu {
+		@apply border-tertiary ml-4 border-l pl-2;
+
+		a {
+			@apply py-2 text-sm font-medium normal-case;
+		}
+	}
+}
+
+/* Stop the page scrolling behind the open drawer */
+html:has(.site-drawer[open]) {
+	@apply overflow-hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.site-drawer,
+	.site-drawer::backdrop {
+		transition: none;
+	}
+}

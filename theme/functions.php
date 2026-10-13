@@ -77,11 +77,23 @@ if ( ! function_exists( 'hopewave_setup' ) ) :
 		 */
 		add_theme_support( 'post-thumbnails' );
 
-		// This theme uses wp_nav_menu() in two locations.
+		// This theme uses wp_nav_menu() in three locations.
 		register_nav_menus(
 			array(
-				'menu-1' => __( 'Primary', 'hopewave' ),
-				'menu-2' => __( 'Footer Menu', 'hopewave' ),
+				'menu-1' => __( 'Primary (header drawer)', 'hopewave' ),
+				'menu-2' => __( 'Footer: Quick Links', 'hopewave' ),
+				'menu-3' => __( 'Footer: Other Links', 'hopewave' ),
+			)
+		);
+
+		// The header and footer logo is managed under Appearance → Customize.
+		add_theme_support(
+			'custom-logo',
+			array(
+				'height'      => 231,
+				'width'       => 173,
+				'flex-height' => true,
+				'flex-width'  => true,
 			)
 		);
 
@@ -144,7 +156,9 @@ add_action( 'widgets_init', 'hopewave_widgets_init' );
  * Enqueue scripts and styles.
  */
 function hopewave_scripts() {
-	wp_enqueue_style( 'hopewave-style', get_stylesheet_uri(), array(), HOPEWAVE_VERSION );
+	// Poppins, loaded from Google Fonts as on the original site.
+	wp_enqueue_style( 'hopewave-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap', array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+	wp_enqueue_style( 'hopewave-style', get_stylesheet_uri(), array( 'hopewave-fonts' ), HOPEWAVE_VERSION );
 	wp_enqueue_script( 'hopewave-script', get_template_directory_uri() . '/js/script.min.js', array(), HOPEWAVE_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -209,6 +223,23 @@ function hopewave_modify_heading_levels( $args, $block_type ) {
 	return $args;
 }
 add_filter( 'register_block_type_args', 'hopewave_modify_heading_levels', 10, 2 );
+
+/**
+ * Keep Elementor Pro's Theme Builder from replacing our header and footer.
+ *
+ * Elementor Pro takes over `get_header()`/`get_footer()` for any theme that
+ * hasn't registered these locations. Registering them here (without ever
+ * calling `elementor_theme_do_location()`) means the legacy Elementor header
+ * and footer templates never render while Elementor is still installed during
+ * the rebuild. This hook simply stops firing once Elementor is removed.
+ *
+ * @param \ElementorPro\Modules\ThemeBuilder\Classes\Locations_Manager $manager Elementor's locations manager.
+ */
+function hopewave_register_elementor_locations( $manager ) {
+	$manager->register_location( 'header' );
+	$manager->register_location( 'footer' );
+}
+add_action( 'elementor/theme/register_locations', 'hopewave_register_elementor_locations' );
 
 /**
  * Custom template tags for this theme.

@@ -24,7 +24,7 @@
 <?php wp_body_open(); ?>
 
 <div id="page">
-	<a href="#content" class="sr-only"><?php esc_html_e( 'Skip to content', 'hopewave' ); ?></a>
+	<a href="#content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-[5px] focus:bg-white focus:px-4 focus:py-2 focus:text-secondary focus:shadow-lg"><?php esc_html_e( 'Skip to content', 'hopewave' ); ?></a>
 
 	<?php get_template_part( 'template-parts/layout/header', 'content' ); ?>
 
