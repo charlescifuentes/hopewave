@@ -46,8 +46,8 @@
  * https://make.wordpress.org/core/2021/06/29/on-layout-and-content-width-in-wordpress-5-8/
  */
 .page-content > *,
-.entry-content > * {
-	/* Content width from the `theme.json` file */
+.entry-content:not(.builder-content) > * {
+	/* Content width from the `theme.json` file (WPBakery rows set their own) */
 	@apply max-w-content mx-auto;
 }
 

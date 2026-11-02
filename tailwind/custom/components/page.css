@@ -1,0 +1,30 @@
+/**
+ * Page layouts. See `template-parts/content/content-page.php`.
+ */
+
+/*
+ * WPBakery pages: a 1140px container with 15px padding. WPBakery rows pull
+ * out by 15px on each side, so row content lines up with the header, and
+ * "Stretch row" widens a row to the full viewport from there.
+ */
+.builder-content {
+	@apply max-w-wide mx-auto px-3.75;
+}
+
+/*
+ * Other pages (mostly plugin pages): a title above a text column, matching
+ * the original theme's 50px padding and 50px bold title. These selectors
+ * out-rank the post defaults in `components.css`, which centre a narrower
+ * column.
+ */
+.page-entry {
+	@apply max-w-wide mx-auto px-4 py-12.5;
+
+	.entry-title {
+		@apply mx-0 mt-2 mb-4 max-w-none text-[50px] leading-[1.2] font-bold;
+	}
+
+	.entry-content > * {
+		@apply mx-0 max-w-none;
+	}
+}
