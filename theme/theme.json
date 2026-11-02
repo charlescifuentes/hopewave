@@ -48,6 +48,21 @@
 					"slug": "border",
 					"color": "#c2c2c2",
 					"name": "Border Grey"
+				},
+				{
+					"slug": "muted",
+					"color": "#7a7a7a",
+					"name": "Muted Text"
+				},
+				{
+					"slug": "link",
+					"color": "#cc3366",
+					"name": "Link"
+				},
+				{
+					"slug": "link-hover",
+					"color": "#333366",
+					"name": "Link Hover"
 				}
 			]
 		},

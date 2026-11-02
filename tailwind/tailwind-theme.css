@@ -26,6 +26,9 @@
 	--color-ink: #1c244b;
 	--color-light: #ececec; /* Home page background */
 	--color-border: #c2c2c2;
+	--color-muted: #7a7a7a; /* Body text on the marketing pages */
+	--color-link: #cc3366; /* Link colours inherited from Hello Elementor */
+	--color-link-hover: #333366;
 
 	--container-content: 48rem;
 	--container-wide: 71.25rem; /* 1140px, Elementor's boxed width */
@@ -56,4 +59,8 @@
 	/**
 	 * Add your theme below:
 	 */
+
+	/* WPBakery page content: Roboto section titles over Montserrat body text */
+	--font-heading: "Roboto", ui-sans-serif, system-ui, sans-serif;
+	--font-body: "Montserrat", ui-sans-serif, system-ui, sans-serif;
 }

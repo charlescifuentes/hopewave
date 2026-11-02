@@ -136,8 +136,12 @@ add_action( 'after_setup_theme', 'hopewave_setup' );
  * Enqueue scripts and styles.
  */
 function hopewave_scripts() {
-	// Poppins, loaded from Google Fonts as on the original site.
-	wp_enqueue_style( 'hopewave-fonts', 'https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap', array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+	// Google Fonts, as on the original site: Poppins for the site chrome, and
+	// Roboto titles over Montserrat text for WPBakery page content. This uses
+	// the older `css` API, which takes every family in one `family` value:
+	// css2 repeats the `family` key, and WordPress's query-arg helpers (run on
+	// this URL by the Disable XML-RPC-API plugin) keep only the last one.
+	wp_enqueue_style( 'hopewave-fonts', 'https://fonts.googleapis.com/css?family=Montserrat:400,400i,700|Poppins:300,400,400i,500,600,700|Roboto:600&display=swap', array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 	wp_enqueue_style( 'hopewave-style', get_stylesheet_uri(), array( 'hopewave-fonts' ), HOPEWAVE_VERSION );
 	wp_enqueue_script( 'hopewave-script', get_template_directory_uri() . '/js/script.min.js', array(), HOPEWAVE_VERSION, true );
 

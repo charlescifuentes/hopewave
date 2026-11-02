@@ -1,0 +1,77 @@
+/**
+ * WPBakery page content.
+ *
+ * Restores the typography that Tailwind's Preflight removes and sets defaults
+ * matching the original Elementor pages, so most elements need no styling in
+ * the editor. Element selectors use `:where()` to stay as weak as a single
+ * class, so WPBakery's own options and "Extra class name" classes override
+ * them.
+ *
+ * WPBakery's stylesheet loads after ours, so rules that change its spacing
+ * start with `.builder-content` to out-rank its single-class selectors.
+ */
+
+.builder-content {
+	@apply font-body text-muted text-base leading-normal;
+
+	/* Elementor's heading widget: Roboto 600 with a line height of 1 */
+	:where(h1, h2, h3, h4, h5, h6) {
+		@apply font-heading mb-4 leading-none font-semibold text-black;
+	}
+
+	/* Hello Elementor's heading scale, except h2: the section title on every page */
+	:where(h1) {
+		@apply text-[40px];
+	}
+
+	:where(h2) {
+		@apply text-[36px] lg:text-[55px];
+	}
+
+	:where(h3) {
+		@apply text-[28px];
+	}
+
+	:where(h4) {
+		@apply text-2xl;
+	}
+
+	:where(h5) {
+		@apply text-xl;
+	}
+
+	:where(h6) {
+		@apply text-base;
+	}
+
+	:where(p, ul, ol) {
+		@apply mb-[0.9rem];
+	}
+
+	:where(ul, ol) {
+		@apply pl-10;
+	}
+
+	:where(ul) {
+		@apply list-disc;
+	}
+
+	:where(ol) {
+		@apply list-decimal;
+	}
+
+	:where(a) {
+		@apply text-link hover:text-link-hover underline transition-colors;
+	}
+
+	/* Space between elements, matching Elementor's 20px widget gap */
+	.wpb_content_element,
+	.vc_custom_heading {
+		@apply mb-5;
+	}
+
+	/* No trailing gap after the last element in a column */
+	.wpb_wrapper > :last-child {
+		@apply mb-0;
+	}
+}
