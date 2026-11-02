@@ -10,6 +10,8 @@
  * @package hopewave
  */
 
+// Signed-in visitors get Account and Logout in place of Sign Up and Login.
+$hopewave_signed_in      = is_user_logged_in();
 $hopewave_header_buttons = array(
 	array(
 		'label' => __( 'Donate', 'hopewave' ),
@@ -18,14 +20,15 @@ $hopewave_header_buttons = array(
 		'arrow' => true,
 	),
 	array(
-		'label' => __( 'Sign Up', 'hopewave' ),
-		'url'   => home_url( '/register/' ),
+		'label' => $hopewave_signed_in ? __( 'Account', 'hopewave' ) : __( 'Sign Up', 'hopewave' ),
+		'url'   => $hopewave_signed_in ? home_url( '/account/' ) : home_url( '/register/' ),
 		'class' => 'btn-header bg-secondary text-white text-shadow-[0_0_10px_rgb(0_0_0_/_0.3)]',
 		'arrow' => false,
 	),
 	array(
-		'label' => __( 'Login', 'hopewave' ),
-		'url'   => home_url( '/login/' ),
+		'label' => $hopewave_signed_in ? __( 'Logout', 'hopewave' ) : __( 'Login', 'hopewave' ),
+		// WordPress's own logout link works whichever login plugin the client settles on.
+		'url'   => $hopewave_signed_in ? wp_logout_url( home_url( '/' ) ) : home_url( '/login/' ),
 		'class' => 'btn-header bg-tertiary text-black shadow-glow-sky',
 		'arrow' => false,
 	),
