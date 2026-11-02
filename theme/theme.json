@@ -50,6 +50,11 @@
 					"name": "Border Grey"
 				},
 				{
+					"slug": "ice",
+					"color": "#e5f5fc",
+					"name": "Ice Blue"
+				},
+				{
 					"slug": "muted",
 					"color": "#7a7a7a",
 					"name": "Muted Text"

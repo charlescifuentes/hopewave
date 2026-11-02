@@ -11,18 +11,23 @@
 
 /**
  * Header drawer: the dot-grid button opens the primary menu in a <dialog>.
+ * Any other button controlling the drawer (such as the [hopewave_page_nav]
+ * menu button on small screens) opens it too.
  */
 const drawer = document.getElementById('site-drawer');
-const toggle = document.querySelector('.menu-toggle');
+const toggles = document.querySelectorAll('[aria-controls="site-drawer"]');
 
-if (drawer && toggle) {
-	const setExpanded = (expanded) =>
-		toggle.setAttribute('aria-expanded', String(expanded));
+if (drawer && toggles.length) {
+	// The button that opened the drawer gets focus back when it closes.
+	let opener = null;
 
-	toggle.addEventListener('click', () => {
-		drawer.showModal();
-		setExpanded(true);
-	});
+	toggles.forEach((toggle) =>
+		toggle.addEventListener('click', () => {
+			opener = toggle;
+			drawer.showModal();
+			toggle.setAttribute('aria-expanded', 'true');
+		})
+	);
 
 	drawer
 		.querySelector('.drawer-close')
@@ -37,8 +42,8 @@ if (drawer && toggle) {
 
 	// Fires for the close button, backdrop clicks and the Escape key alike.
 	drawer.addEventListener('close', () => {
-		setExpanded(false);
-		toggle.focus();
+		opener?.setAttribute('aria-expanded', 'false');
+		opener?.focus();
 	});
 }
 

@@ -1,0 +1,24 @@
+/**
+ * In-page navigation from the [hopewave_page_nav] shortcode: the primary menu
+ * in a row, collapsing below `lg` to a menu button that opens the header's
+ * menu drawer. Values mirror the original Elementor nav menu widget.
+ *
+ * Selectors start with `.page-nav` to out-rank the list and link defaults
+ * in `wpbakery.css`, which loads after this file.
+ */
+
+.page-nav .page-nav-menu {
+	@apply m-0 hidden list-none flex-wrap justify-center p-0 lg:flex;
+
+	a {
+		@apply focus-visible:outline-primary block px-5 py-[13px] font-sans text-[15px] leading-5 font-bold text-black uppercase underline hover:text-black focus-visible:outline-2;
+	}
+}
+
+.page-nav .page-nav-toggle {
+	@apply focus-visible:outline-primary mx-auto grid place-items-center rounded-[3px] bg-black/5 p-1 text-[#33373d] focus-visible:outline-2 lg:hidden;
+
+	svg {
+		@apply size-[22px];
+	}
+}

@@ -1,0 +1,237 @@
+/**
+ * Home page, built in WPBakery. Each class is set on a row, column or element
+ * through its "Extra class name" field; values mirror the original Elementor
+ * page. Background images are set in WPBakery's Design Options, so editors
+ * can change them.
+ *
+ * Rules sit under `.builder-content` so they out-rank `wpbakery.css` and
+ * WPBakery's own stylesheet, both of which load after this file.
+ */
+
+/* The grey page background also shows behind the header */
+body.home {
+	@apply bg-light;
+}
+
+.builder-content {
+	/*
+	 * Hero: background image under a dark overlay. Content sits 330px down on
+	 * desktop and is centred on smaller screens.
+	 */
+	.home-hero {
+		@apply relative mt-2.5 flex min-h-[217px] items-center md:min-h-[314px] lg:min-h-[649px] lg:items-start lg:pt-[330px];
+
+		&::before {
+			@apply absolute inset-0 block bg-black/31;
+			content: "";
+		}
+
+		&::after {
+			@apply hidden;
+		}
+
+		> .wpb_column {
+			@apply relative z-1;
+		}
+	}
+
+	/* "Hope Wave" over "Charitable Foundation" (the <span>), smaller on phones */
+	.home-hero-title h2 {
+		@apply mb-0 text-center font-sans text-[40px] leading-none font-bold text-white uppercase;
+
+		span {
+			@apply mt-2 block max-md:text-[23px];
+		}
+	}
+
+	/* Nav strip: a 65% wide band holding [hopewave_page_nav] */
+	.home-nav-strip {
+		@apply rounded-b-[40px] bg-white;
+
+		> .wpb_column > .vc_column-inner {
+			@apply mx-auto w-[65%] bg-cover bg-bottom bg-no-repeat;
+		}
+
+		.page-nav {
+			@apply pt-[30px] pb-[5px];
+		}
+	}
+
+	/* White panel holding the four blue cards, 80% wide on desktop */
+	.home-cards-section {
+		@apply relative rounded-b-[40px] bg-white pt-[50px] pb-[70px];
+
+		/* Let the rings reach up into the nav strip (stretched rows clip) */
+		&[data-vc-full-width] {
+			@apply overflow-visible;
+		}
+
+		/* Position the rings against the panel, not the column */
+		> .wpb_column {
+			@apply static;
+		}
+
+		> .wpb_column > .vc_column-inner {
+			@apply mx-auto w-full px-2.5 md:w-[94%] md:px-0 lg:w-4/5;
+		}
+	}
+
+	/* Decorative rings, positioned against the cards panel */
+	.home-ring {
+		@apply pointer-events-none absolute mb-0;
+
+		.vc_single_image-wrapper,
+		img {
+			@apply block w-full;
+		}
+	}
+
+	.home-ring--left {
+		@apply top-[-50px] left-[80px] w-[210px] max-lg:left-0 max-lg:w-[120px];
+	}
+
+	.home-ring--right {
+		@apply top-[-91px] right-0 w-[133px] max-lg:w-[60px];
+	}
+
+	/*
+	 * Card grids (an inner row): 1 column on phones, 2 on tablets, 4 on
+	 * desktop. Add or remove columns freely; their WPBakery widths are ignored.
+	 */
+	.home-grid {
+		@apply relative z-1 mx-0 grid gap-5 md:grid-cols-2 lg:grid-cols-4;
+
+		&::before,
+		&::after {
+			@apply hidden;
+		}
+
+		> .wpb_column {
+			@apply w-full;
+		}
+
+		> .wpb_column > .vc_column-inner {
+			@apply h-full px-0;
+		}
+
+		/* Blue card: turns brand blue with white text on hover */
+		> .home-card > .vc_column-inner {
+			@apply bg-ice rounded-[5px] p-[17px] transition-colors duration-300;
+		}
+
+		> .home-card:hover > .vc_column-inner {
+			@apply bg-primary;
+		}
+
+		/* Article card: white with a coloured link bar along the bottom */
+		> .home-article > .vc_column-inner {
+			@apply border-border flex flex-col overflow-hidden rounded-[5px] border bg-white;
+
+			> .wpb_wrapper {
+				@apply flex flex-1 flex-col;
+			}
+		}
+	}
+
+	/* Blue card: image, title, description, and a "Read More" last line */
+	.home-card .wpb_single_image {
+		@apply mb-[15px];
+	}
+
+	.home-card .wpb_text_column {
+		@apply font-sans;
+
+		h2 {
+			@apply mb-[15px] font-sans text-[17px] leading-none font-bold text-black capitalize;
+		}
+
+		p {
+			@apply text-muted mb-[0.9rem] text-sm leading-normal max-lg:text-xs;
+		}
+
+		/*
+		 * The top margin absorbs the description's 0.9rem (margins collapse).
+		 * Space below is padding: WPBakery zeroes a last child's margin with
+		 * an ID selector (`#content .wpb_text_column :last-child`).
+		 */
+		p:last-child {
+			@apply mt-[29px] pb-[0.9rem] text-[15px] font-medium text-black;
+		}
+	}
+
+	.home-card:hover .wpb_text_column :is(h2, p) {
+		@apply text-white;
+	}
+
+	/* Articles banner: background image with a centred heading */
+	.home-banner {
+		@apply min-h-[473px] pt-[82px] text-center font-sans text-white;
+
+		h2 {
+			@apply mb-5 font-sans text-[44px] leading-none font-extrabold text-white uppercase;
+		}
+
+		p {
+			@apply text-lg leading-none font-semibold capitalize;
+		}
+	}
+
+	/* Article cards overlap the banner, 90% wide on desktop */
+	.home-articles {
+		@apply -mt-[230px] pb-[30px];
+
+		> .wpb_column > .vc_column-inner {
+			@apply mx-auto w-full px-2.5 md:w-[97%] md:px-0 lg:w-[90%];
+		}
+	}
+
+	.home-article {
+		.wpb_single_image {
+			@apply mb-[15px] p-[17px];
+		}
+
+		/* Optional byline (a paragraph before the title), title, description */
+		.wpb_text_column:not(:last-child) {
+			@apply px-[17px] font-sans;
+
+			p:has(+ h3) {
+				@apply mb-[15px] text-[15px] leading-none font-medium text-black capitalize max-lg:text-xs max-lg:leading-[17px];
+			}
+
+			h3 {
+				@apply mb-[15px] font-sans text-[15px] leading-none font-semibold text-black capitalize;
+			}
+
+			p {
+				@apply text-muted text-sm leading-normal font-medium max-lg:text-[11px];
+			}
+
+			/* Padding, not margin: see the "Read More" note above */
+			p:last-child {
+				@apply pb-[0.9rem];
+			}
+		}
+
+		/* Link bar: the last text block, "No Comments" then "Read More" */
+		.wpb_text_column:last-child {
+			@apply bg-secondary hover:bg-primary mt-auto mb-0 px-[15px] pt-[25px] pb-6 font-sans transition-colors;
+
+			> .wpb_wrapper {
+				@apply flex justify-between gap-5;
+			}
+
+			p {
+				@apply mb-0 text-[15px] leading-normal font-medium text-white;
+			}
+
+			p:first-child {
+				@apply underline;
+			}
+		}
+	}
+
+	/* The first article's bar is brand blue, as on the original page */
+	.home-article--highlight .wpb_text_column:last-child {
+		@apply bg-primary;
+	}
+}

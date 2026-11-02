@@ -82,8 +82,7 @@ function hopewave_can_show_post_thumbnail() {
  * Builder pages run full width with no visible title, leaving the layout to
  * their rows. WPBakery content always starts with a `[vc_row]` shortcode,
  * which is more reliable than its `_wpb_vc_js_status` meta (that only records
- * which editor tab was last open). Elementor pages are included until
- * Elementor is removed at launch, so they can still be compared locally.
+ * which editor tab was last open).
  *
  * @param int|WP_Post|null $post Post ID or object. Defaults to the current post.
  * @return bool
@@ -95,8 +94,7 @@ function hopewave_is_builder_page( $post = null ) {
 		return false;
 	}
 
-	$is_builder = str_contains( $post->post_content, '[vc_row' )
-		|| 'builder' === get_post_meta( $post->ID, '_elementor_edit_mode', true );
+	$is_builder = str_contains( $post->post_content, '[vc_row' );
 
 	return (bool) apply_filters( 'hopewave_is_builder_page', $is_builder, $post );
 }

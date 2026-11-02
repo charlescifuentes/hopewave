@@ -239,3 +239,8 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer settings (footer subscribe form and text).
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * WPBakery Page Builder elements.
+ */
+require get_template_directory() . '/inc/wpbakery.php';

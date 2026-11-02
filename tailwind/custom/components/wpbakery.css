@@ -74,4 +74,22 @@
 	.wpb_wrapper > :last-child {
 		@apply mb-0;
 	}
+
+	/*
+	 * WPBakery adds 35px above the columns of a row with a background (and of
+	 * the row after it); the Elementor pages had no such gap. `:is()` takes
+	 * the specificity of WPBakery's strongest selector here, so this wins.
+	 */
+	:is(
+			.vc_col-has-fill,
+			.vc_row-has-fill > .vc_column_container,
+			.vc_row-has-fill + .vc_row > .vc_column_container,
+			.vc_row-has-fill
+				+ .vc_row-full-width
+				+ .vc_row
+				> .vc_column_container
+		)
+		> .vc_column-inner {
+		@apply pt-0;
+	}
 }
