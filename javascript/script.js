@@ -41,3 +41,80 @@ if (drawer && toggle) {
 		toggle.focus();
 	});
 }
+
+/**
+ * Footer "Our Courses" carousel: arrow buttons scroll the snap track one
+ * slide at a time and wrap around at either end. Autoplay advances every
+ * `data-autoplay` ms, pauses on hover/focus, stops for good once the visitor
+ * uses the arrows or scrolls the track, and is skipped for reduced motion.
+ */
+document.querySelectorAll('.course-carousel').forEach((carousel) => {
+	const track = carousel.querySelector('.carousel-track');
+	if (!track || track.children.length < 2) {
+		return;
+	}
+
+	const step = () => {
+		const [first, second] = track.children;
+		return second.offsetLeft - first.offsetLeft;
+	};
+
+	const go = (direction) => {
+		const maxScroll = track.scrollWidth - track.clientWidth;
+		const atEnd = track.scrollLeft >= maxScroll - 2;
+		const atStart = track.scrollLeft <= 2;
+
+		if (direction > 0 && atEnd) {
+			track.scrollTo({ left: 0, behavior: 'smooth' });
+		} else if (direction < 0 && atStart) {
+			track.scrollTo({ left: maxScroll, behavior: 'smooth' });
+		} else {
+			track.scrollBy({ left: direction * step(), behavior: 'smooth' });
+		}
+	};
+
+	let timer = null;
+	let stopped = false;
+
+	const stop = () => {
+		clearInterval(timer);
+		timer = null;
+	};
+	const start = () => {
+		const delay = Number(carousel.dataset.autoplay);
+		if (stopped || timer || !delay) {
+			return;
+		}
+		timer = setInterval(() => go(1), delay);
+	};
+	const stopForGood = () => {
+		stopped = true;
+		stop();
+	};
+
+	carousel.querySelectorAll('.carousel-arrow').forEach((arrow) => {
+		arrow.addEventListener('click', () => {
+			stopForGood();
+			go(Number(arrow.dataset.direction));
+		});
+	});
+
+	track.addEventListener('keydown', (event) => {
+		if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') {
+			event.preventDefault();
+			stopForGood();
+			go(event.key === 'ArrowRight' ? 1 : -1);
+		}
+	});
+	track.addEventListener('wheel', stopForGood, { passive: true });
+	track.addEventListener('touchstart', stopForGood, { passive: true });
+
+	carousel.addEventListener('mouseenter', stop);
+	carousel.addEventListener('mouseleave', start);
+	carousel.addEventListener('focusin', stop);
+	carousel.addEventListener('focusout', start);
+
+	if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		start();
+	}
+});

@@ -133,26 +133,6 @@ endif;
 add_action( 'after_setup_theme', 'hopewave_setup' );
 
 /**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
-function hopewave_widgets_init() {
-	register_sidebar(
-		array(
-			'name'          => __( 'Footer', 'hopewave' ),
-			'id'            => 'sidebar-1',
-			'description'   => __( 'Add widgets here to appear in your footer.', 'hopewave' ),
-			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
-		)
-	);
-}
-add_action( 'widgets_init', 'hopewave_widgets_init' );
-
-/**
  * Enqueue scripts and styles.
  */
 function hopewave_scripts() {
@@ -250,3 +230,8 @@ require get_template_directory() . '/inc/template-tags.php';
  * Functions which enhance the theme by hooking into WordPress.
  */
 require get_template_directory() . '/inc/template-functions.php';
+
+/**
+ * Customizer settings (footer subscribe form and text).
+ */
+require get_template_directory() . '/inc/customizer.php';

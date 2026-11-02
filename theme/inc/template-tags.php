@@ -304,3 +304,48 @@ if ( ! function_exists( 'hopewave_content_class' ) ) :
 		echo 'class="' . esc_attr( implode( ' ', $combined_classes ) ) . '"';
 	}
 endif;
+
+if ( ! function_exists( 'hopewave_footer_menu_column' ) ) :
+	/**
+	 * Prints a footer link column: the assigned menu's name as the heading,
+	 * followed by its links.
+	 *
+	 * @param string $location Theme menu location.
+	 */
+	function hopewave_footer_menu_column( $location ) {
+		if ( ! has_nav_menu( $location ) ) {
+			return;
+		}
+
+		$heading_id = 'footer-' . $location . '-heading';
+		?>
+		<nav class="footer-column" aria-labelledby="<?php echo esc_attr( $heading_id ); ?>">
+			<h2 id="<?php echo esc_attr( $heading_id ); ?>" class="footer-heading"><?php echo esc_html( wp_get_nav_menu_name( $location ) ); ?></h2>
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => $location,
+					'menu_class'     => 'footer-links',
+					'container'      => false,
+					'depth'          => 1,
+				)
+			);
+			?>
+		</nav>
+		<?php
+	}
+endif;
+
+if ( ! function_exists( 'hopewave_footer_course_images' ) ) :
+	/**
+	 * Attachment IDs for the footer "Our Courses" carousel.
+	 *
+	 * These are the six images from the original Elementor footer. Filter
+	 * `hopewave_footer_course_images` to change them.
+	 *
+	 * @return int[]
+	 */
+	function hopewave_footer_course_images() {
+		return (array) apply_filters( 'hopewave_footer_course_images', array( 46, 45, 44, 43, 31, 30 ) );
+	}
+endif;
