@@ -48,8 +48,13 @@ body.home {
 	.home-nav-strip {
 		@apply rounded-b-[40px] bg-white;
 
+		/*
+		 * The background image's rounded corners are along its bottom edge.
+		 * WPBakery's Design Options always set a position (and sometimes a
+		 * size) with `!important`, so these must be `!important` too.
+		 */
 		> .wpb_column > .vc_column-inner {
-			@apply mx-auto w-[65%] bg-cover bg-bottom bg-no-repeat;
+			@apply mx-auto w-[65%] bg-cover! bg-bottom! bg-no-repeat!;
 		}
 
 		.page-nav {
