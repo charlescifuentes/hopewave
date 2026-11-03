@@ -1,0 +1,61 @@
+/**
+ * Split section: a heading and text beside an image, as on the Mission,
+ * Education, Scholarship and Partners pages. Set `split-section` in the
+ * "Extra class name" of a row with two 1/2 columns, text first. Values
+ * mirror the original Elementor sections; columns stack below `md`.
+ *
+ * Rules sit under `.builder-content` so they out-rank `wpbakery.css` and
+ * WPBakery's own stylesheet, both of which load after this file.
+ */
+
+.builder-content .split-section {
+	@apply py-5 md:flex md:py-12.5;
+
+	/* WPBakery's clearfix pseudo-elements would become flex items */
+	&::before,
+	&::after {
+		@apply md:hidden;
+	}
+
+	/*
+	 * 10px around each column. The vertical padding is on the wrapper because
+	 * `wpbakery.css` zeroes the top padding of columns in rows with a
+	 * background.
+	 */
+	> .wpb_column > .vc_column-inner {
+		@apply px-2.5;
+
+		> .wpb_wrapper {
+			@apply py-2.5;
+		}
+	}
+
+	/* The text column is centred against the image */
+	> .wpb_column:first-child > .vc_column-inner {
+		@apply md:flex md:h-full md:flex-col md:justify-center;
+	}
+
+	.wpb_text_column {
+		@apply max-lg:text-sm max-lg:leading-normal;
+
+		h2 {
+			@apply mb-5;
+		}
+
+		/*
+		 * Padding, not margin: WPBakery zeroes a last child's margin with an
+		 * ID selector (`#content .wpb_text_column :last-child`).
+		 */
+		p:last-child {
+			@apply pb-[0.9rem];
+		}
+	}
+
+	.wpb_single_image {
+		@apply text-center;
+
+		img {
+			@apply rounded-[10px];
+		}
+	}
+}
