@@ -1,0 +1,58 @@
+/**
+ * Inner-page banners, as on the Projects, Education, Scholarship and
+ * Partners pages. Set each class in the "Extra class name" of a row with
+ * "Stretch row" enabled; values mirror the original Elementor sections.
+ *
+ * Rules sit under `.builder-content` so they out-rank `wpbakery.css` and
+ * WPBakery's own stylesheet, both of which load after this file.
+ */
+
+.builder-content {
+	/*
+	 * Hero: a 400px background image under a dark overlay, with the white
+	 * page title centred vertically. Set the image in the row's Design
+	 * Options; its position and size are fixed here because WPBakery always
+	 * writes its own with `!important`.
+	 */
+	.page-hero {
+		@apply relative flex min-h-[400px] items-center bg-cover! bg-right! bg-no-repeat!;
+
+		&::before {
+			@apply absolute inset-0 block bg-black/35;
+			content: "";
+		}
+
+		&::after {
+			@apply hidden;
+		}
+
+		> .wpb_column {
+			@apply relative z-1 w-full;
+		}
+
+		/*
+		 * The title lines up with the 1140px container, keeping 10px from the
+		 * screen edge when the container is wider than the screen.
+		 */
+		> .wpb_column > .vc_column-inner {
+			@apply px-2.5 min-[1160px]:px-0;
+		}
+
+		h2 {
+			@apply mb-0 text-[60px] text-white;
+		}
+	}
+
+	/* Grey band with the page title centred in it */
+	.page-title-band {
+		@apply bg-panel py-5;
+
+		> .wpb_column > .vc_column-inner {
+			@apply px-0;
+		}
+
+		h2 {
+			@apply mb-0 text-center text-[60px];
+		}
+	}
+}

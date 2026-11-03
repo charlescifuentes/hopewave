@@ -1,0 +1,88 @@
+/**
+ * Projects page, built in WPBakery. Each class is set on a row, column or
+ * element through its "Extra class name" field; values mirror the original
+ * Elementor page.
+ *
+ * Rules sit under `.builder-content` so they out-rank `wpbakery.css` and
+ * WPBakery's own stylesheet, both of which load after this file.
+ */
+
+.builder-content {
+	/*
+	 * Grey panel with rounded bottom corners holding the topic cards (a
+	 * "Stretch row and content" row), 90% wide from tablets up.
+	 */
+	.projects-panel {
+		@apply bg-panel rounded-b-[40px] pt-12.5 pb-17.5;
+
+		> .wpb_column > .vc_column-inner {
+			@apply mx-auto w-full px-0 md:w-[90%];
+		}
+	}
+
+	/*
+	 * Card grid (an inner row): one column on phones, all cards in one row
+	 * from tablets up. Add or remove columns freely; their WPBakery widths
+	 * are ignored.
+	 */
+	.projects-grid {
+		@apply mx-0 grid auto-cols-fr gap-5 md:grid-flow-col;
+
+		&::before,
+		&::after {
+			@apply hidden;
+		}
+
+		> .wpb_column {
+			@apply w-full;
+		}
+
+		> .wpb_column > .vc_column-inner {
+			@apply h-full px-0;
+		}
+
+		/* Blue card: turns brand blue with white text on hover */
+		> .project-card > .vc_column-inner {
+			@apply bg-ice rounded-[5px] p-[17px] transition-colors duration-300;
+		}
+
+		> .project-card:hover > .vc_column-inner {
+			@apply bg-primary;
+		}
+	}
+
+	/* Card image: cropped to 200 × 180, shrinking on narrow cards */
+	.project-card .wpb_single_image {
+		@apply mb-[15px] text-center;
+
+		img {
+			@apply aspect-[10/9] w-[200px] object-cover;
+		}
+	}
+
+	/* Title, description, and a "Read More" link as the last line */
+	.project-card .wpb_text_column {
+		@apply font-sans;
+
+		h2 {
+			@apply mb-[15px] font-sans text-[17px] leading-none font-bold text-black capitalize;
+		}
+
+		p {
+			@apply text-muted mb-[0.9rem] text-sm leading-normal font-light;
+		}
+
+		/*
+		 * The top margin absorbs the description's 0.9rem (margins collapse).
+		 * Space below is padding: WPBakery zeroes a last child's margin with
+		 * an ID selector (`#content .wpb_text_column :last-child`).
+		 */
+		p:last-child {
+			@apply mt-[29px] pb-[0.9rem] text-[15px] font-medium text-black;
+		}
+	}
+
+	.project-card:hover .wpb_text_column :is(h2, p) {
+		@apply text-white;
+	}
+}

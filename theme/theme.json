@@ -55,6 +55,11 @@
 					"name": "Ice Blue"
 				},
 				{
+					"slug": "panel",
+					"color": "#e9e9e9",
+					"name": "Panel Grey"
+				},
+				{
 					"slug": "muted",
 					"color": "#7a7a7a",
 					"name": "Muted Text"
