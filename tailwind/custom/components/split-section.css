@@ -4,17 +4,55 @@
  * "Extra class name" of a row with two 1/2 columns, text first. Values
  * mirror the original Elementor sections; columns stack below `md`.
  *
+ * The columns share a centred 1140px box. For a grey section, set the
+ * row's background colour to #e9e9e9 in its Design Options and choose
+ * "Stretch row and content (no paddings)"; the box stays centred.
+ *
+ * Modifiers, added after `split-section`:
+ * - `split-section--reverse`: image on the left, and first on phones.
+ * - `split-section--flush`: no padding above and below on phones.
+ * - `split-section--wide`: a 1226px box, for long headings.
+ * - `split-section--wide-text`: a 55/45 split in favour of the text.
+ *
  * Rules sit under `.builder-content` so they out-rank `wpbakery.css` and
  * WPBakery's own stylesheet, both of which load after this file.
  */
 
 .builder-content .split-section {
-	@apply py-5 md:flex md:py-12.5;
+	--split-box: 1140px;
+
+	@apply py-5 md:flex md:justify-center md:py-12.5;
 
 	/* WPBakery's clearfix pseudo-elements would become flex items */
 	&::before,
 	&::after {
-		@apply md:hidden;
+		@apply hidden;
+	}
+
+	> .wpb_column {
+		@apply md:max-w-[calc(var(--split-box)*0.5)];
+	}
+
+	&.split-section--reverse {
+		@apply flex flex-col-reverse md:flex-row-reverse;
+	}
+
+	&.split-section--flush {
+		@apply max-md:py-0;
+	}
+
+	&.split-section--wide {
+		--split-box: 1226px;
+	}
+
+	&.split-section--wide-text {
+		> .wpb_column:first-child {
+			@apply md:w-[55%] md:max-w-[calc(var(--split-box)*0.55)];
+		}
+
+		> .wpb_column:last-child {
+			@apply md:w-[45%] md:max-w-[calc(var(--split-box)*0.45)];
+		}
 	}
 
 	/*

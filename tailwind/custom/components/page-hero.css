@@ -43,6 +43,15 @@
 		}
 	}
 
+	/* Shorter on tablets and phones, with a smaller, centred title */
+	.page-hero--responsive {
+		@apply max-lg:min-h-[266px] max-md:min-h-[162px];
+
+		h2 {
+			@apply max-lg:text-center max-lg:text-[50px] max-md:text-[38px];
+		}
+	}
+
 	/* Grey band with the page title centred in it */
 	.page-title-band {
 		@apply bg-panel py-5;
