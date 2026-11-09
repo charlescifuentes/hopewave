@@ -1,0 +1,35 @@
+/**
+ * Donation page, built in WPBakery. The class is set on a row through its
+ * "Extra class name" field; values mirror the original Elementor page.
+ *
+ * The GiveWP form draws its own design inside an iframe, so only the space
+ * around it is styled here.
+ *
+ * Rules sit under `.builder-content` so they out-rank `wpbakery.css` and
+ * WPBakery's own stylesheet, both of which load after this file.
+ */
+
+/*
+ * Grey section ("Stretch row and content (no paddings)", background colour
+ * #e9e9e9 in Design Options) holding the heading and the form, full width
+ * with 10px from the screen edges, as on the original page.
+ */
+.builder-content .donation-section {
+	@apply py-12.5;
+
+	/*
+	 * The vertical padding is on the wrapper because `wpbakery.css` zeroes
+	 * the top padding of columns in rows with a background.
+	 */
+	> .wpb_column > .vc_column-inner {
+		@apply px-2.5;
+
+		> .wpb_wrapper {
+			@apply py-2.5;
+		}
+	}
+
+	h2 {
+		@apply mb-0 max-md:text-center;
+	}
+}
