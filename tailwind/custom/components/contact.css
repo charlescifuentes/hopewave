@@ -1,0 +1,82 @@
+/**
+ * Contact Us page, built in WPBakery. Each class is set on a row through its
+ * "Extra class name" field; values mirror the original Elementor page, whose
+ * two half-width columns stack below `lg`.
+ *
+ * Rules sit under `.builder-content` so they out-rank `wpbakery.css` and
+ * WPBakery's own stylesheet, both of which load after this file.
+ */
+
+.builder-content {
+	/*
+	 * Grey section ("Stretch row and content (no paddings)", background
+	 * colour #e9e9e9 in Design Options): text and image beside the form, in
+	 * a centred 1140px box.
+	 */
+	.contact-section {
+		@apply py-12.5 lg:flex lg:justify-center;
+
+		/* WPBakery's clearfix pseudo-elements would become flex items */
+		&::before,
+		&::after {
+			@apply hidden;
+		}
+
+		> .wpb_column {
+			@apply w-full lg:w-1/2 lg:max-w-[570px];
+		}
+
+		/*
+		 * 10px around each column. The vertical padding is on the wrapper
+		 * because `wpbakery.css` zeroes the top padding of columns in rows
+		 * with a background.
+		 */
+		> .wpb_column > .vc_column-inner {
+			@apply px-2.5;
+
+			> .wpb_wrapper {
+				@apply py-2.5;
+			}
+		}
+
+		.wpb_text_column {
+			@apply max-md:text-sm max-md:leading-normal;
+
+			h2 {
+				@apply mb-5;
+			}
+
+			/*
+			 * Padding, not margin: WPBakery zeroes a last child's margin with
+			 * an ID selector (`#content .wpb_text_column :last-child`).
+			 */
+			p:last-child {
+				@apply pb-[0.9rem];
+			}
+		}
+
+		/* Image at 87% of the column on desktop, full width below */
+		.wpb_single_image {
+			:is(.vc_figure, .vc_single_image-wrapper) {
+				@apply block;
+			}
+
+			img {
+				@apply w-full rounded-[10px] lg:w-[87%];
+			}
+		}
+	}
+
+	/* Full-width map, 10px from the screen edges */
+	.contact-map > .wpb_column > .vc_column-inner {
+		@apply px-2.5;
+
+		.wpb_gmaps_widget {
+			@apply mb-0;
+
+			.wpb_wrapper {
+				@apply bg-transparent p-0;
+			}
+		}
+	}
+}
