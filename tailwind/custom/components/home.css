@@ -35,7 +35,11 @@ body.home {
 		}
 	}
 
-	/* "Hope Wave" over "Charitable Foundation" (the <span>), smaller on phones */
+	/*
+	 * "Hope Wave" over "Charitable Foundation" (the <span>), smaller on
+	 * phones. The span needs a class: the editor's Visual tab deletes spans
+	 * without attributes.
+	 */
 	.home-hero-title h2 {
 		@apply mb-0 text-center font-sans text-[40px] leading-none font-bold text-white uppercase;
 

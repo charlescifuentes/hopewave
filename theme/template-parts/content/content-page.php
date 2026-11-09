@@ -48,7 +48,8 @@
 
 		<?php hopewave_post_thumbnail(); ?>
 
-		<div <?php hopewave_content_class( 'entry-content' ); ?>>
+		<?php // No Tailwind Typography: the plugin pages bring their own styles. ?>
+		<div class="entry-content">
 			<?php
 			the_content();
 

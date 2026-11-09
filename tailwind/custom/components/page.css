@@ -12,13 +12,13 @@
 }
 
 /*
- * Other pages (mostly plugin pages): a title above a text column, matching
- * the original theme's 50px padding and 50px bold title. These selectors
- * out-rank the post defaults in `components.css`, which centre a narrower
- * column.
+ * Other pages (the Ultimate Member, LearnDash and GiveWP pages): a centred
+ * title above centred content, in the original theme's stepped container
+ * with 50px padding and a 50px bold title. These selectors out-rank the post
+ * defaults in `components.css`, which centre a narrower column.
  */
 .page-entry {
-	@apply max-w-wide mx-auto px-4 py-12.5;
+	@apply mx-auto px-2.5 py-12.5 text-center min-[576px]:max-w-[500px] min-[576px]:px-0 min-[768px]:max-w-[600px] min-[992px]:max-w-[800px] min-[1200px]:max-w-[1140px];
 
 	.entry-title {
 		@apply mx-0 mt-2 mb-4 max-w-none text-[50px] leading-[1.2] font-bold;
@@ -26,5 +26,98 @@
 
 	.entry-content > * {
 		@apply mx-0 max-w-none;
+	}
+}
+
+/*
+ * The plugins' forms were designed against the original theme (Hello
+ * Elementor), whose base styles Tailwind's Preflight removes. These restore
+ * the parts the plugins rely on, with the same element-only specificity as
+ * the originals (the container is wrapped in `:where()`), so each plugin's
+ * own styles still win.
+ */
+:where(.page-entry .entry-content) {
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply mt-2 mb-4 leading-[1.2] font-medium;
+	}
+
+	h1 {
+		@apply text-[2.5rem];
+	}
+
+	h2 {
+		@apply text-[2rem];
+	}
+
+	h3 {
+		@apply text-[1.75rem];
+	}
+
+	h4 {
+		@apply text-2xl;
+	}
+
+	h5 {
+		@apply text-xl;
+	}
+
+	p {
+		@apply mb-[0.9rem];
+	}
+
+	a {
+		@apply text-link hover:text-link-hover;
+	}
+
+	ul {
+		@apply list-disc pl-10;
+	}
+
+	ol {
+		@apply list-decimal pl-10;
+	}
+
+	strong,
+	b {
+		@apply font-bold;
+	}
+
+	input:is(
+		[type="date"],
+		[type="email"],
+		[type="number"],
+		[type="password"],
+		[type="search"],
+		[type="tel"],
+		[type="text"],
+		[type="url"]
+	),
+	select,
+	textarea {
+		@apply w-full rounded-[3px] border border-[#666] px-4 py-2 transition-all duration-300 focus:border-[#333];
+	}
+
+	[type="button"],
+	[type="submit"],
+	button {
+		@apply border-link text-link hover:bg-link focus:bg-link inline-block cursor-pointer rounded-[3px] border bg-transparent px-4 py-2 text-base whitespace-nowrap transition-all duration-300 select-none hover:text-white focus:text-white;
+	}
+
+	table {
+		@apply mb-[15px] w-full border-collapse text-[0.9em];
+	}
+
+	td,
+	th {
+		@apply border border-[#80808080] p-[15px] align-top;
+	}
+
+	tbody > tr:nth-child(odd) > :is(td, th) {
+		@apply bg-[#80808012];
 	}
 }
