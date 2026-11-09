@@ -1,0 +1,50 @@
+/**
+ * Text Page template (`theme/page-templates/text-page.php`): the page title
+ * above block editor content on a grey band. Values mirror the original
+ * Elementor Terms of Use page, with the marketing pages' typography.
+ */
+
+.text-page {
+	@apply bg-panel py-12.5;
+}
+
+/* The 1140px container, keeping 10px from the screen edge */
+.text-page-inner {
+	@apply max-w-wide mx-auto px-2.5;
+}
+
+.text-page .entry-title {
+	@apply font-heading mx-0 mb-5 max-w-none text-[55px] leading-none font-semibold text-black;
+}
+
+/*
+ * Tailwind Typography's defaults, adjusted to the marketing pages: Montserrat
+ * in muted grey, Roboto headings, pink links and Elementor's paragraph
+ * spacing. These selectors out-rank the typography classes set in
+ * `functions.php` and the centred column in `components.css`.
+ */
+.text-page .entry-content {
+	--tw-prose-body: var(--color-muted);
+	--tw-prose-headings: var(--color-black);
+	--tw-prose-bold: var(--color-black);
+	--tw-prose-bullets: var(--color-muted);
+	--tw-prose-counters: var(--color-muted);
+
+	@apply font-body text-base leading-normal;
+
+	> * {
+		@apply mx-0 max-w-none;
+	}
+
+	:is(h2, h3, h4, h5, h6) {
+		@apply font-heading leading-none font-semibold;
+	}
+
+	p {
+		@apply mt-0 mb-[0.9rem];
+	}
+
+	a {
+		@apply text-link hover:text-link-hover transition-colors;
+	}
+}
