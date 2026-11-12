@@ -3,7 +3,7 @@
  * Template part for displaying the footer content
  *
  * Mirrors the original Elementor footer: logo, Quick Links, an "Our Courses"
- * image carousel, Other Links and a "Subscribe Us" Gravity Form, followed by
+ * image carousel, Other Links and a "Subscribe Us" Contact Form 7 form, followed by
  * a copyright bar.
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
@@ -66,9 +66,11 @@ $hopewave_subscribe_id  = (int) get_theme_mod( 'hopewave_subscribe_form', 0 );
 				<?php endif; ?>
 
 				<?php
-				if ( $hopewave_subscribe_id && function_exists( 'gravity_form' ) ) {
-					// Title and description off, AJAX on, the plain "gravity-theme" so our styles apply cleanly.
-					gravity_form( $hopewave_subscribe_id, false, false, false, null, true, 0, true, 'gravity-theme' );
+				$hopewave_subscribe_form = $hopewave_subscribe_id && function_exists( 'wpcf7_contact_form' ) ? wpcf7_contact_form( $hopewave_subscribe_id ) : null;
+
+				if ( $hopewave_subscribe_form ) {
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Contact Form 7 escapes its own markup.
+					echo $hopewave_subscribe_form->form_html();
 				}
 				?>
 			</section>

@@ -19,7 +19,7 @@ function hopewave_customize_register( $wp_customize ) {
 		)
 	);
 
-	// "Subscribe Us" column: intro text and Gravity Form.
+	// "Subscribe Us" column: intro text and Contact Form 7 form.
 	$wp_customize->add_setting(
 		'hopewave_subscribe_text',
 		array(
@@ -47,26 +47,26 @@ function hopewave_customize_register( $wp_customize ) {
 		'hopewave_subscribe_form',
 		array(
 			'label'       => __( 'Subscribe form', 'hopewave' ),
-			'description' => __( 'Gravity Form shown in the "Subscribe Us" column.', 'hopewave' ),
+			'description' => __( 'Contact Form 7 form shown in the "Subscribe Us" column.', 'hopewave' ),
 			'section'     => 'hopewave_footer',
 			'type'        => 'select',
-			'choices'     => hopewave_gravity_form_choices(),
+			'choices'     => hopewave_contact_form_choices(),
 		)
 	);
 }
 add_action( 'customize_register', 'hopewave_customize_register' );
 
 /**
- * List active Gravity Forms as select choices.
+ * List Contact Form 7 forms as select choices.
  *
  * @return array<int, string> Form titles keyed by form ID.
  */
-function hopewave_gravity_form_choices() {
+function hopewave_contact_form_choices() {
 	$choices = array( 0 => __( '— None —', 'hopewave' ) );
 
-	if ( class_exists( 'GFAPI' ) ) {
-		foreach ( GFAPI::get_forms() as $form ) {
-			$choices[ (int) $form['id'] ] = $form['title'];
+	if ( class_exists( 'WPCF7_ContactForm' ) ) {
+		foreach ( WPCF7_ContactForm::find( array( 'posts_per_page' => -1 ) ) as $form ) {
+			$choices[ $form->id() ] = $form->title();
 		}
 	}
 

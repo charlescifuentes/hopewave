@@ -241,6 +241,11 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/customizer.php';
 
 /**
+ * Contact Form 7 integration (subscribe and contact forms).
+ */
+require get_template_directory() . '/inc/contact-form-7.php';
+
+/**
  * WPBakery Page Builder elements.
  */
 require get_template_directory() . '/inc/wpbakery.php';

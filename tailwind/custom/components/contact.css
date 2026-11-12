@@ -55,6 +55,58 @@
 			}
 		}
 
+		/*
+		 * Contact Form 7 form: labels above white fields and a full-width
+		 * button, as the original Elementor form. `.wpcf7` in the selectors
+		 * out-ranks Contact Form 7's own styles.
+		 */
+		.wpcf7 {
+			.contact-field {
+				@apply mb-2.5;
+			}
+
+			label {
+				@apply text-muted block text-base leading-none;
+			}
+
+			.wpcf7-form-control-wrap {
+				@apply block;
+			}
+
+			:is(input:not([type="submit"]), textarea) {
+				@apply text-muted focus:border-primary focus:outline-primary min-h-10 w-full rounded-[3px] border border-[#69727d] bg-white px-4 py-2 text-[15px] leading-[1.4] focus:outline-1;
+			}
+
+			textarea {
+				@apply h-24 resize-y px-3.5 py-[5px];
+			}
+
+			/* Button colours from the original form: #17a4e0, #6ec1e4 on hover */
+			.wpcf7-submit {
+				@apply focus-visible:outline-secondary min-h-10 w-full cursor-pointer rounded-[3px] border-0 bg-[#17a4e0] px-4 text-base leading-none font-medium text-white transition-colors hover:bg-[#6ec1e4] focus-visible:outline-2 focus-visible:outline-offset-2;
+			}
+
+			/*
+			 * Spinner (inside the right end of the button, taking no space),
+			 * field errors and the message shown after submitting
+			 */
+			.wpcf7-spinner {
+				@apply relative -mt-7 mr-3 mb-3 ml-auto block size-4;
+			}
+
+			.wpcf7-not-valid {
+				@apply border-red-600;
+			}
+
+			.wpcf7-not-valid-tip {
+				@apply mt-1 text-sm text-red-700;
+			}
+
+			form .wpcf7-response-output {
+				@apply mx-0 mt-2.5 mb-0 rounded-[3px] px-4 py-2 text-sm;
+			}
+		}
+
 		/* Image at 87% of the column on desktop, full width below */
 		.wpb_single_image {
 			:is(.vc_figure, .vc_single_image-wrapper) {
