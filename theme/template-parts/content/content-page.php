@@ -4,8 +4,8 @@
  *
  * Pages built with WPBakery run full width with no visible title, so their
  * rows control the layout. Other pages (mostly plugin pages such as Login,
- * Account or the donor dashboard) get a title above a text column, as on the
- * original site. Neither shows an edit link; the admin bar has one.
+ * Account or the donor dashboard, plus LearnDash courses and lessons through
+ * single.php) get a title above a text column, as on the original site. Neither shows an edit link; the admin bar has one.
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *

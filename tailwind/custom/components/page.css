@@ -34,9 +34,18 @@
  * Elementor), whose base styles Tailwind's Preflight removes. These restore
  * the parts the plugins rely on, with the same element-only specificity as
  * the originals (the container is wrapped in `:where()`), so each plugin's
- * own styles still win.
+ * own styles still win. `.ld-focus-content` is the content area of
+ * LearnDash's focus mode, which replaces the whole page on lessons.
  */
-:where(.page-entry .entry-content) {
+:where(.page-entry .entry-content, .ld-focus-content) {
+	/*
+	 * Wide images reach 80px beyond the text on each side, where the screen
+	 * has room for it (the 1140px container needs 1300px).
+	 */
+	.alignwide {
+		@apply min-[768px]:max-[1199px]:-mx-20 min-[1300px]:-mx-20;
+	}
+
 	h1,
 	h2,
 	h3,

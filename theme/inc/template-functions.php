@@ -100,6 +100,28 @@ function hopewave_is_builder_page( $post = null ) {
 }
 
 /**
+ * Determines whether the current view is a single LearnDash item: a course,
+ * lesson, topic, quiz, group and so on.
+ *
+ * @return bool
+ */
+function hopewave_is_learndash_single() {
+	return function_exists( 'learndash_get_post_types' ) && is_singular( learndash_get_post_types() );
+}
+
+/**
+ * Hides the featured image on LearnDash items, as the original theme did.
+ * LearnDash courses usually repeat the image in their content.
+ *
+ * @param bool $can_show Whether the featured image can be shown.
+ * @return bool
+ */
+function hopewave_hide_learndash_thumbnail( $can_show ) {
+	return $can_show && ! hopewave_is_learndash_single();
+}
+add_filter( 'hopewave_can_show_post_thumbnail', 'hopewave_hide_learndash_thumbnail' );
+
+/**
  * Returns the size for avatars used in the theme.
  */
 function hopewave_get_avatar_size() {

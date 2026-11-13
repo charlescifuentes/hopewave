@@ -17,7 +17,9 @@ get_header();
 			/* Start the Loop */
 			while ( have_posts() ) :
 				the_post();
-				get_template_part( 'template-parts/content/content', 'single' );
+
+				// LearnDash items use the plugin pages' layout (see content-page.php).
+				get_template_part( 'template-parts/content/content', hopewave_is_learndash_single() ? 'page' : 'single' );
 
 				if ( is_singular( 'post' ) ) {
 					// Previous/next post navigation.
